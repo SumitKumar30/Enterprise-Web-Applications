@@ -10,7 +10,7 @@ public class ReadFile {
 	public static void main(String[] args)throws FileNotFoundException, IOException {
 		// TODO Auto-generated method stub
 		ArrayList<String> words = new ArrayList<>();
-		File file = new File("C:\\Users\\lenovo\\eclipse-workspace\\CollectionsFramework\\src","dummy.txt");
+		File file = new File("ABSOLUTE_PATH_TO_FILE","dummy.txt");
 		System.out.println("File path is: "+file.getCanonicalPath());
 //		String path = file.getCanonicalPath();
 		Scanner sc = new Scanner(file);
