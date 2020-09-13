@@ -12,7 +12,7 @@ public class AliceWordFrequency {
 	public static void main(String[] args)throws FileNotFoundException {
 		// TODO Auto-generated method stub
 		Map<String, Integer> frequencies = new HashMap<>();
-		File file = new File("C:\\Users\\lenovo\\eclipse-workspace\\CollectionsFramework\\src\\MapPrograms\\","alice_in_wonderland.txt");
+		File file = new File("ABSOLUTE_PATH_TO_FILE","alice_in_wonderland.txt");
 		Scanner sc = new Scanner(file);
 		while( sc.hasNext() ) { 
 				String word = sc.next().toLowerCase();
