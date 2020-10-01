@@ -1,21 +1,21 @@
 package Generics;
 
-public class GeneralClass<Z> {
+public class GeneralClass<T> {
 		// declare generic class objects
 		
 		// T can be of any type --> Wrapper object / User defined object
-		private Z data;
+		private T data;
 		
 //		GeneralClass(T data){
 //			this.data = data;
 //		}
 		
-		void setData(Z data) {
+		void setData(T data) {
 			this.data = data;
 		}
 		
 		// return any type of value 
-		Z getData(){
+		T getData(){
 			return this.data;
 		}
 }
