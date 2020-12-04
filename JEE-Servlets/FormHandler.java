@@ -1,8 +1,8 @@
-// Servlet class to perform CRUD operations over input form data.
+
 
 import java.io.IOException;
 import java.io.PrintWriter;
-
+import java.sql.*;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class FormHandler extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
+       
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -28,7 +28,7 @@ public class FormHandler extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
-
+		
 	}
 
 	/**
@@ -55,7 +55,7 @@ public class FormHandler extends HttpServlet {
 	      response.setContentType("text/html; charset=UTF-8");
 	      // Allocate a output writer to write the response message into the network socket
 	      PrintWriter out = response.getWriter();
-
+	 
 	      // Write the response message, in an HTML page
 	      try {
 	         out.println("<!DOCTYPE html>");
@@ -63,7 +63,13 @@ public class FormHandler extends HttpServlet {
 	         out.println("<meta http-equiv='Content-Type' content='text/html; charset=UTF-8'>");
 	         out.println("<title>Echo Servlet</title></head>");
 	         out.println("<body><h2>You have entered</h2>");
-
+	         
+	         Class.forName("com.mysql.cj.jdbc.Driver");
+	         
+	         Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/mysql","root","Admin@12345");
+	         
+	         
+	         
 	         // Retrieve the value of the query parameter "username" (from text field)
 	         String username = request.getParameter("username");
 	         if (username == null) {
@@ -95,7 +101,7 @@ public class FormHandler extends HttpServlet {
 	            System.out.println("Please enter your age!!");
 	         } else if (age.equals("1")) {
 	            out.println("<p>Age: &lt; 1 year old</p>");
-	         } else if (age.equals("99")) {
+	         } else if (age.equals("25")) {
 	            out.println("<p>Age: 1 to 99 years old</p>");
 	         } else {
 	            out.println("<p>Age: &gt; 99 years old</p>");
@@ -104,18 +110,22 @@ public class FormHandler extends HttpServlet {
 	         // Multiple entries possible.
 	         // Use getParameterValues() which returns an array of String.
 	         String[] languages = request.getParameterValues("language");
+	         String lang = null;
 	         // Get null if the parameter is missing from query string.
 	         if (languages == null || languages.length == 0) {
 	            System.out.println("Languages None!");
 	         } else {
 	            out.println("<p>Languages: ");
 	            for (String language : languages) {
-	               if (language.equals("c")) {
-	                  out.println("C/C++ ");
+	               if (language.equals("java")) {
+	                  out.println("Java ");
+	                  lang = "Java";
 	               } else if (language.equals("cs")) {
 	                  out.println("C# ");
-	               } else if (language.equals("java")) {
-	                  out.println("Java ");
+	                  lang = lang + " C#";
+	               } else if (language.equals("c")) {
+	                  out.println("C/C++ ");
+	                  lang = lang + " C";
 	               }
 	            }
 	            out.println("</p>");
@@ -132,11 +142,31 @@ public class FormHandler extends HttpServlet {
 	         String secret = request.getParameter("secret");
 	         out.println("<p>Secret: " + secret + "</p>");
 	      // Hyperlink "BACK" to input page
-	         out.println("<a href='index.jsp'>BACK</a>");
-
+	         out.println("<a href='index.jsp'>BACK</a>"+"  "+"<a href='ViewServlet'>View Details</a>");
+	 
 	         out.println("</body></html>");
-
-	      }
+	         
+	         String insert_query = "insert into personal_info values ('"+username+"', '"+password+"', '"+gender+"', "+age+", '"+lang+"','"+instruction+"')";
+	      
+	         Statement stmt = con.createStatement();
+	         
+	         int record = stmt.executeUpdate(insert_query);
+	         
+	         if(record == 1) {
+	        	 	out.println("<h2>Record Inserted Successfully</h2>");
+	         }else {
+	        	 out.println("<h2>Error in saving the record!!<h2>");
+	         }
+	         
+	         out.println("</body></html>");
+	      
+	      } catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
 	      finally {
 	          out.close();  // Always close the output writer
 	       }
