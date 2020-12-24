@@ -1,0 +1,37 @@
+Database Name: people
+Table Name: user_login
+
++-----------+-------------+------+-----+---------+-------+
+| Field     | Type        | Null | Key | Default | Extra |
++-----------+-------------+------+-----+---------+-------+
+| user_id   | varchar(15) | NO   | PRI | NULL    |       |
+| user_name | varchar(30) | NO   |     | NULL    |       |
+| old_pswd  | varchar(20) | YES  |     | NULL    |       |
+| new_pswd  | varchar(20) | YES  |     | NULL    |       |
++-----------+-------------+------+-----+---------+-------+
+
+Query: create table user_login(user_id varchar(15) NOT NULL, user_name varchar(30) NOT NULL, old_pswd varchar(20), new_pswd varchar(20), primary key(emp_id));
+
+
+Table Name: people_employee
+
++-------------+-------------+------+-----+---------+-------+
+| Field       | Type        | Null | Key | Default | Extra |
++-------------+-------------+------+-----+---------+-------+
+| emp_id      | varchar(10) | NO   | PRI | NULL    |       |
+| emp_f_name  | varchar(20) | NO   |     | NULL    |       |
+| emp_m_name  | varchar(20) | YES  |     | NULL    |       |
+| emp_l_name  | varchar(20) | YES  |     | NULL    |       |
+| org_id      | varchar(10) | NO   |     | NULL    |       |
+| level_id    | varchar(10) | NO   |     | NULL    |       |
+| dept_id     | varchar(10) | NO   |     | NULL    |       |
+| dob         | date        | YES  |     | NULL    |       |
+| dojoin      | date        | YES  |     | NULL    |       |
+| address_1   | varchar(50) | YES  |     | NULL    |       |
+| address_2   | varchar(50) | YES  |     | NULL    |       |
+| city        | varchar(15) | YES  |     | NULL    |       |
+| state       | varchar(20) | YES  |     | NULL    |       |
+| nationality | varchar(15) | YES  |     | NULL    |       |
++-------------+-------------+------+-----+---------+-------+
+
+Query: create table people_employee(emp_id varchar(10) NOT NULL, emp_f_name varchar(20) NOT NULL, emp_m_name varchar(20), emp_l_name varchar(20), org_id varchar(10) NOT NULL, level_id varchar(10) NOT NULL, dept_id varchar(10) NOT NULL, dob date, dojoin date, address_1 varchar(50), address_2 varchar(50), city varchar(15), state varchar(20), nationality varchar(15), primary key(emp_id));

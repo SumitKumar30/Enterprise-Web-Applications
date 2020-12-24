@@ -1,0 +1,3 @@
+Open this project "PeopleMgmt" into Eclipse.
+
+Table Schema is given to create tables on mysql database.
